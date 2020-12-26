@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import static com.gildedrose.ItemTypes.*;
 
+// TODO: Extend with conjured item flag.
 public class ItemBuilder {
 
     public static Item createItem(final String name, final int sellIn, final int quality) {
