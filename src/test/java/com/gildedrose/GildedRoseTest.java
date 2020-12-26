@@ -7,54 +7,57 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
 
-    @Test
-    void testRegularItem() {
-        Item[] items = new Item[] { new Item("foo", 12, 20) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("foo", app.items[0].name);
-        assertEquals(11, app.items[0].sellIn);
-        assertEquals(19, app.items[0].quality);
-    }
+    @Nested
+    class NormalItem {
+        @Test
+        void testNormalItem() {
+            Item[] items = new Item[] { new Item("foo", 12, 20) };
+            GildedRose app = new GildedRose(items);
+            app.updateQuality();
+            assertEquals("foo", app.items[0].name);
+            assertEquals(11, app.items[0].sellIn);
+            assertEquals(19, app.items[0].quality);
+        }
 
-    @Test
-    void testRegularItemSellInReached() {
-        Item[] items = new Item[] { new Item("foo", 0, 20) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("foo", app.items[0].name);
-        assertEquals(-1, app.items[0].sellIn);
-        assertEquals(18, app.items[0].quality);
-    }
+        @Test
+        void testNormalItemSellInReached() {
+            Item[] items = new Item[] { new Item("foo", 0, 20) };
+            GildedRose app = new GildedRose(items);
+            app.updateQuality();
+            assertEquals("foo", app.items[0].name);
+            assertEquals(-1, app.items[0].sellIn);
+            assertEquals(18, app.items[0].quality);
+        }
 
-    @Test
-    void testRegularItemQualityNegative() {
-        Item[] items = new Item[] { new Item("foo", 12, 0) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("foo", app.items[0].name);
-        assertEquals(11, app.items[0].sellIn);
-        assertEquals(0, app.items[0].quality);
-    }
+        @Test
+        void testNormalItemQualityNegative() {
+            Item[] items = new Item[] { new Item("foo", 12, 0) };
+            GildedRose app = new GildedRose(items);
+            app.updateQuality();
+            assertEquals("foo", app.items[0].name);
+            assertEquals(11, app.items[0].sellIn);
+            assertEquals(0, app.items[0].quality);
+        }
 
-    @Test
-    void testRegularItemQualityNegativeWhenSellInReached() {
-        Item[] items = new Item[] { new Item("foo", 0, 1) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("foo", app.items[0].name);
-        assertEquals(-1, app.items[0].sellIn);
-        assertEquals(0, app.items[0].quality);
-    }
+        @Test
+        void testNormalItemQualityNegativeWhenSellInReached() {
+            Item[] items = new Item[] { new Item("foo", 0, 1) };
+            GildedRose app = new GildedRose(items);
+            app.updateQuality();
+            assertEquals("foo", app.items[0].name);
+            assertEquals(-1, app.items[0].sellIn);
+            assertEquals(0, app.items[0].quality);
+        }
 
-    @Test
-    void testRegularItemQualityZeroWhenSellInReached() {
-        Item[] items = new Item[] { new Item("foo", 0, 0) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("foo", app.items[0].name);
-        assertEquals(-1, app.items[0].sellIn);
-        assertEquals(0, app.items[0].quality);
+        @Test
+        void testNormalItemQualityZeroWhenSellInReached() {
+            Item[] items = new Item[] { new Item("foo", 0, 0) };
+            GildedRose app = new GildedRose(items);
+            app.updateQuality();
+            assertEquals("foo", app.items[0].name);
+            assertEquals(-1, app.items[0].sellIn);
+            assertEquals(0, app.items[0].quality);
+        }
     }
 
     @Nested
