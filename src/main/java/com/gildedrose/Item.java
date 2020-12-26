@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+// TODO: public fields should be private
 public class Item {
 
     public String name;
