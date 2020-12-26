@@ -1,18 +1,20 @@
 package com.gildedrose;
 
-import static com.gildedrose.ItemTypes.BACKSTAGE_PASSES;
-
 public class DegradationService {
 
     public int getDegradationFactor(Item item) {
-        if (!BACKSTAGE_PASSES.equals(item.name)) {
-            if (item.sellIn < 0) {
-                return 2;
-            } else {
-                return 1;
-            }
+        if (item.sellIn < 0) {
+            return multiplyByConjuringFactor(item, 2);
         } else {
-            return 1;
+            return multiplyByConjuringFactor(item, 1);
+        }
+    }
+
+    private int multiplyByConjuringFactor(Item item, int degradationFactor) {
+        if (item instanceof ConjuredItem) {
+            return degradationFactor * 2;
+        } else {
+            return degradationFactor;
         }
     }
 }

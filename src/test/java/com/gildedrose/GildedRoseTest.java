@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static com.gildedrose.ItemTypes.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// TODO: Use mock for DegradationService, refactor GildedRose so we can use beforeEach to create instance.
 class GildedRoseTest {
 
     @Test

@@ -26,6 +26,8 @@ class GildedRose {
         }
     }
 
+    // TODO: Create service/services for executing this logic.
+    // Quality update methods for all item types.
     private void updateQualityForSulfuras(Item sulfuras) {
         // Do nothing.
     }
