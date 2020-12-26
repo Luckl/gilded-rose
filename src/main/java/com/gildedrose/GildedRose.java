@@ -32,9 +32,8 @@ class GildedRose {
 
     // TODO: Validate if conjuring factor also applies to the backstage passes.
     private void updateQualityForBackstagePasses(Item backstagePasses) {
-        if (backstagePasses.quality < 50) {
-            backstagePasses.quality = backstagePasses.quality + 1;
-        }
+
+        backstagePasses.quality = backstagePasses.quality + 1;
         backstagePasses.sellIn = backstagePasses.sellIn - 1;
         if (backstagePasses.sellIn < 10) {
             backstagePasses.quality = backstagePasses.quality + 1;
@@ -44,6 +43,9 @@ class GildedRose {
         }
         if (backstagePasses.sellIn < 0) {
             backstagePasses.quality = 0;
+        }
+        if (backstagePasses.quality > 50) {
+            backstagePasses.quality = 50;
         }
     }
 
