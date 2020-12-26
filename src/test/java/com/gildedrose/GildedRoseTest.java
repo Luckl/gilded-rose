@@ -129,6 +129,16 @@ class GildedRoseTest {
         }
 
         @Test
+        void testBackstagePassQualityNotAboveFiftyEvenIfDaysLowerThanTen() {
+            Item[] items = new Item[]{new Item(BACKSTAGE_PASSES, 6, 50)};
+            GildedRose app = new GildedRose(items, new DegradationService());
+            app.updateQuality();
+            assertEquals(BACKSTAGE_PASSES, app.items[0].name);
+            assertEquals(5, app.items[0].sellIn);
+            assertEquals(50, app.items[0].quality);
+        }
+
+        @Test
         void testBackstagePassMoreThanTenDays() {
             Item[] items = new Item[]{new Item(BACKSTAGE_PASSES, 11, 10)};
             GildedRose app = new GildedRose(items, new DegradationService());
