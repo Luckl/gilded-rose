@@ -5,6 +5,9 @@ import static com.gildedrose.ItemTypes.*;
 public class ItemBuilder {
 
     public static Item createItem(final String name, final int sellIn, final int quality) {
+
+        // TODO: Add validation on fields
+
         if (AGED_BRIE.equals(name)) {
             return createAgedBrie(sellIn, quality);
         } else if (BACKSTAGE_PASSES.equals(name)) {
