@@ -20,11 +20,24 @@ class DegradationServiceTest {
         int degradationFactor = degradationService.getDegradationFactor(item);
         assertEquals(degradationFactor, 1);
     }
+    @Test
+    void testGetDegradationFactorForConjuredItemWithinSellIn() {
+        Item item = new ConjuredItem("item", 10, 2);
+        int degradationFactor = degradationService.getDegradationFactor(item);
+        assertEquals(degradationFactor, 2);
+    }
 
     @Test
     void testGetDegradationFactorForNormalItemAfterSellIn() {
         Item item = new Item("item", -1, 2);
         int degradationFactor = degradationService.getDegradationFactor(item);
         assertEquals(degradationFactor, 2);
+    }
+
+    @Test
+    void testGetDegradationFactorForConjuredItemAfterSellIn() {
+        Item item = new ConjuredItem("item", -1, 2);
+        int degradationFactor = degradationService.getDegradationFactor(item);
+        assertEquals(degradationFactor, 4);
     }
 }
