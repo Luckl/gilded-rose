@@ -5,8 +5,11 @@ import static com.gildedrose.ItemTypes.*;
 class GildedRose {
     Item[] items;
 
-    public GildedRose(Item[] items) {
+    private DegradationService degradationService;
+
+    public GildedRose(Item[] items, DegradationService degradationService) {
         this.items = items;
+        this.degradationService = degradationService;
     }
 
     public void updateQuality() {
@@ -27,6 +30,7 @@ class GildedRose {
         // Do nothing.
     }
 
+    // TODO: Validate if conjuring factor also applies to the backstage passes.
     private void updateQualityForBackstagePasses(Item backstagePasses) {
         if (backstagePasses.quality < 50) {
             backstagePasses.quality = backstagePasses.quality + 1;
@@ -44,26 +48,20 @@ class GildedRose {
     }
 
     private void updateQualityForAgedBrie(Item brie) {
-        if (brie.quality < 50) {
-            brie.quality = brie.quality + 1;
-        }
         brie.sellIn = brie.sellIn - 1;
-        if (brie.sellIn < 0) {
-            if (brie.quality < 50) {
-                brie.quality = brie.quality + 1;
-            }
+        final int degradationFactor = degradationService.getDegradationFactor(brie);
+        brie.quality = brie.quality + degradationFactor;
+        if (brie.quality > 50) {
+            brie.quality = 50;
         }
     }
 
     private void updateQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
         item.sellIn = item.sellIn - 1;
-        if (item.sellIn < 0) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
+        final int degradationFactor = degradationService.getDegradationFactor(item);
+        item.quality = item.quality - degradationFactor;
+        if (item.quality < 0) {
+            item.quality = 0;
         }
     }
 }
